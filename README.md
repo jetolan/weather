@@ -1,0 +1,1 @@
+Collects data from sensors and writes to csv file
