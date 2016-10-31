@@ -31,7 +31,7 @@ def wplot():
  
  #hack to make datetime64 in Pacific for bokeh plotting
  loc_np=[X-np.timedelta64(7, 'h') for X in loc_dt_np]
- 
+
 
  def dew_point(T, RH):
   #from https://en.wikipedia.org/wiki/Dew_point
@@ -47,12 +47,12 @@ def wplot():
  #weather data
  temp=np.array(data['temp']) * 9/5 + 32 # convert to F
  temp_mcp9808=np.array(data['temp_mcp9808']) * 9/5 + 32 # convert to F
- pressure=data['pressure'] *  0.000295299830714 #convert to inHg 
- humidity=data['humidity'] # percentage
+ pressure=np.array(data['pressure']) *  0.000295299830714 #convert to inHg 
+ humidity=np.array(data['humidity']) # percentage
  dew_p=[]
  for i in range(len(humidity)):
   dew_p.append((dew_point(data['temp'][i],data['humidity'][i])))
-
+ dewp_p=np.array(dew_p)
  #--------------------#
   
  window_size = 30
@@ -80,13 +80,16 @@ def wplot():
 
   return pl
 
- labels={"title":"Air Temperature", "xaxis":"Date (Pacific Time)", "yaxis":"Temperature / degrees F", "color":["red", "orange"]}
+ labels={"title":"Air Temperature", "xaxis":"Date (Pacific Time)", \
+         "yaxis":"Temperature / degrees F", "color":["red", "orange"]}
  p1=line_plot(loc_np, [temp, temp_mcp9808], labels)
  
- labels={"title":"Barometric Pressure", "xaxis":"Date (Pacific Time)", "yaxis":"Pressure / inHg","color":["green"]}
+ labels={"title":"Barometric Pressure", "xaxis":"Date (Pacific Time)", \
+          "yaxis":"Pressure / inHg","color":["green"]}
  p2=line_plot(loc_np, [pressure], labels)
 
- labels={"title":"Relative Humidity", "xaxis":"Date (Pacific Time)", "yaxis":"Humdity / Percent", "color":["navy"]}
+ labels={"title":"Relative Humidity", "xaxis":"Date (Pacific Time)", \
+          "yaxis":"Humdity / Percent", "color":["navy"]}
  p3=line_plot(loc_np, [humidity], labels)
 
 
@@ -101,4 +104,16 @@ def wplot():
  #OR, output to string variables which can be written into another html file
  script, div = components(p)
 
- return script, div
+ #also output latest values
+ latest={'time':str(loc_np[-1]), 'temp':temp[-1], 'pressure':pressure[-1], \
+  'humidity':humidity[-1], 'dew_point':dew_p[-1]}
+ 
+ return script, div, latest
+
+
+###################################
+
+
+if __name__ == "__main__":    
+    
+    script, div, latest = wplot()
