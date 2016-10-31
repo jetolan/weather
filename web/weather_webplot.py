@@ -52,7 +52,7 @@ def wplot():
  dew_p=[]
  for i in range(len(humidity)):
   dew_p.append((dew_point(data['temp'][i],data['humidity'][i])))
- dewp_p=np.array(dew_p)
+ dew_p=np.array(dew_p) * 9/5 + 32 # convert to F
  #--------------------#
   
  window_size = 30
