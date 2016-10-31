@@ -1,7 +1,7 @@
 from weather_webplot import wplot
 
 
-[script,div] = wplot()
+[script,div,latest] = wplot()
 
 ##################################################################
 
@@ -100,8 +100,27 @@ html_str3 = """
                     <h2 class="section-title">Current Conditions</h2>
                 </header>
             <div class="row">
+               <div class="col-md-9">
+                 <p style="font-size: 22px">Time :   """+str(latest['time'])[:-10]+"""</p>
+                 <p style="font-size: 22px">Air Temperature :   """+str(latest['temp'])[:-8]+""" C</p>
+                 <p style="font-size: 22px">Barometric Pressure :   """+str(latest['pressure'])[:-8]+""" inHg</p>
+                 <p style="font-size: 22px">Humidity :   """+str(latest['humidity'])[:-8]+""" %</p>
+                 <p style="font-size: 22px">Dew Point :   """+str(latest['dew_point'])[:-8]+""" C</p>
+               </div>
+            </div>
+      </div> 
+    </section><!-- current -->
+</div>
 
-"""
+    <!--===============================================================================-->
+
+    <!-- Plot -->
+    <div id="plot">
+    <section id="page-profile" class="page-profile">
+      <div class="container">
+            <div class="row">
+            <center>
+            """
 
 ##################################################################
 
@@ -110,10 +129,10 @@ html_str4 = div
 ##################################################################
 
 html_str5 = """
-
+           </center>
 	    </div>
       </div> 
-    </section><!-- why -->
+    </section><!-- plot -->
 </div>
     <!--===============================================================================-->
 
