@@ -1,0 +1,9 @@
+[submodule "Adafruit_Python_MCP9808"]
+	path = Adafruit_Python_MCP9808
+	url = https://github.com/adafruit/Adafruit_Python_MCP9808
+[submodule "Adafruit_Python_BME280"]
+	path = Adafruit_Python_BME280
+	url = https://github.com/adafruit/Adafruit_Python_BME280
+[submodule "Adafruit_Python_GPIO"]
+	path = Adafruit_Python_GPIO
+	url = https://github.com/adafruit/Adafruit_Python_GPIO
