@@ -11,6 +11,8 @@ rsync -rave "ssh -i /home/pi/weather/Insight2016B.pem" /home/pi/weather/weather_
 
 rsync -rave "ssh -i /home/pi/weather/Insight2016B.pem" /home/pi/weather/rain_data.csv ubuntu@54.153.39.29:weather/web/.
 
+rsync -rave "ssh -i /home/pi/weather/Insight2016B.pem" /home/pi/weather/pictures/* ubuntu@54.153.39.29:weather/web/pictures/.
+
 #turn wifi back off to save power
-sudo ifconfig wlan0 down
+#sudo ifconfig wlan0 down
 
