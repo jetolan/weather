@@ -5,7 +5,7 @@ import os
 
 
 #check for output directory
-dir='/home/pi/weather/img'
+dir='/home/pi/weather/pictures'
 if not os.path.exists(dir):
     os.mkdir(dir)
 
@@ -18,3 +18,7 @@ with picamera.PiCamera() as camera:
     time.sleep(1) # Camera warm-up time
     filename = dir+'/image_'+now+'.jpg'
     camera.capture(filename)
+
+#alternatively:
+#raspistill -w 1280 -h 720 -n -t 100 -q 10 -e jpg -th none -o /home/pi/weather/pictures/image.jpg
+    
