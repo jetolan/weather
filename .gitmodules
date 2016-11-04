@@ -7,3 +7,6 @@
 [submodule "Adafruit_Python_GPIO"]
 	path = Adafruit_Python_GPIO
 	url = https://github.com/adafruit/Adafruit_Python_GPIO
+[submodule "Adafruit_Python_ADS1x15"]
+	path = Adafruit_Python_ADS1x15
+	url = https://github.com/adafruit/Adafruit_Python_ADS1x15.git
