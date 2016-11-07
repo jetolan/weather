@@ -97,15 +97,15 @@ html_str3 = """
     <section id="page-profile" class="page-profile">
       <div class="container">
                 <header class="section-header">
-                    <h2 class="section-title">Current Conditions</h2>
+                    <h2 class="section-title">Current Conditions:</h2>
                 </header>
             <div class="row">
                <div class="col-md-9">
-                 <p style="font-size: 22px">Last update :   """+str(latest['time'])[:-10]+"""</p>
-                 <p style="font-size: 22px">Air Temperature :   """+str(latest['temp'])[:-8]+""" &degF</p>
-                 <p style="font-size: 22px">Barometric Pressure :   """+str(latest['pressure'])[:-8]+""" inHg</p>
-                 <p style="font-size: 22px">Relative Humidity :   """+str(latest['humidity'])[:-8]+""" %</p>
-                 <p style="font-size: 22px">Dew Point :   """+str(latest['dew_point'])[:-8]+""" &degF</p>
+                 <p style="font-size: 26px">Last update :   """+str(latest['time'])[:-10]+"""</p>
+                 <p style="font-size: 26px">Air Temperature :   """+str(latest['temp'])[:-8]+""" &degF</p>
+                 <p style="font-size: 26px">Barometric Pressure :   """+str(latest['pressure'])[:-8]+""" inHg</p>
+                 <p style="font-size: 26px">Relative Humidity :   """+str(latest['humidity'])[:-8]+""" %</p>
+                 <p style="font-size: 26px">Dew Point :   """+str(latest['dew_point'])[:-8]+""" &degF</p>
                </div>
             </div>
       </div> 
@@ -118,6 +118,9 @@ html_str3 = """
     <div id="plot">
     <section id="page-profile" class="page-profile">
       <div class="container">
+           <header class="section-header">
+                 <h2 class="section-title">Trends:</h2>
+           </header>
             <div class="row">
             <center>
             """
@@ -133,6 +136,28 @@ html_str5 = """
 	    </div>
       </div> 
     </section><!-- plot -->
+</div>
+    <!--===============================================================================-->
+
+
+ <!--===============================================================================-->
+    <!-- photo begins -->
+    <div id="photo">
+    <section id="page-profile" class="page-profile">
+      <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title">Latest Picture:</h2>
+                </header>
+            <div class="row">
+                 <center>
+                 <a href="""+str(latest['photo'])+""">
+                 <img src="""+str(latest['photo'])+""" alt="latest picture" style="width:50%;height:50%;border:3;"></a>
+                 <p style="font-size: 18px">Capture time : """+str(latest['photo'][15:-4])+"""</p>
+                
+                 </center>
+            </div>
+      </div> 
+    </section><!-- photo -->
 </div>
     <!--===============================================================================-->
 
