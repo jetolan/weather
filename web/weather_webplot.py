@@ -1,4 +1,5 @@
 import numpy as np
+import os
 import datetime
 from datetime import timedelta
 from pytz import utc, timezone
@@ -104,9 +105,13 @@ def wplot():
  #OR, output to string variables which can be written into another html file
  script, div = components(p)
 
+ #get latest photo
+ dirname='pictures/'
+ photos = filter(lambda x: '.jpg' in x.lower(),os.listdir(dirname+'.'))
+ 
  #also output latest values
  latest={'time':str(loc_np[-1]), 'temp':temp[-1], 'pressure':pressure[-1], \
-  'humidity':humidity[-1], 'dew_point':dew_p[-1]}
+         'humidity':humidity[-1], 'dew_point':dew_p[-1], 'photo':dirname+photos[-1]}
  
  return script, div, latest
 
