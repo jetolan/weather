@@ -9,22 +9,13 @@ from bokeh.layouts import gridplot
 from bokeh.models import Range1d
 from bokeh.embed import components
 
-def wplot():
- #--------------------#
- 
- #read csv file with data
- data=pd.read_csv('weather_data.csv', sep=',', header=0, engine='python')
 
- #--------------------#
+def local_time(dt):
+ #input is list of datetime, output is list of np.datetime
  
- #time data
- time=np.array(data['isotime']) # in UTC isotime
- dt=[datetime.datetime.strptime(X, "%Y-%m-%dT%H:%M:%S.%f" ) for X in time]
-
  def to_pacific(dt):
   utc_dt = utc.localize(dt)
-  pacific = timezone('US/Pacific')
-  loc_dt = utc_dt.astimezone(pacific)  
+  loc_dt = utc_dt.astimezone(timezone('US/Pacific'))  
   return loc_dt
  
  loc_dt=[to_pacific(X) for X in dt]
@@ -34,10 +25,13 @@ def wplot():
  for i in range(len(loc_dt)):
     shift=int(str(loc_dt[i])[-4:-3]) #datetime contains tzinfo
     utc_np=np.datetime64(loc_dt[i])
-    loc_np.append(utc_np-np.timedelta64(shift, 'h')) #subtract timezone
- 
+    loc_np.append(utc_np-np.timedelta64(shift, 'h')) #subtract timezone 
 
- def dew_point(T, RH):
+ return loc_np  
+
+
+
+def dew_point(T, RH):
   #from https://en.wikipedia.org/wiki/Dew_point
   #T in Celsius
   #RH in %  (ie 65)
@@ -46,24 +40,12 @@ def wplot():
    d=234.5
    gamma = np.log ( RH/100. * np.exp ( (b - T / d) * (T / ( c +T ))))
    T_dp = ( c * gamma ) / (b - gamma )
-   return T_dp  
- 
- #weather data
- temp=np.array(data['temp']) * 9/5 + 32 # convert to F
- temp_mcp9808=np.array(data['temp_mcp9808']) * 9/5 + 32 # convert to F
- pressure=np.array(data['pressure']) *  0.000295299830714 #convert to inHg 
- humidity=np.array(data['humidity']) # percentage
- dew_p=[]
- for i in range(len(humidity)):
-  dew_p.append((dew_point(data['temp'][i],data['humidity'][i])))
- dew_p=np.array(dew_p) * 9/5 + 32 # convert to F
- #--------------------#
+   return T_dp 
+
+
   
- window_size = 30
- window = np.ones(window_size)/float(window_size)
- 
- #xdata and ydata as list
- def line_plot(xdata, ydata, labels):
+def line_plot(xdata, ydata, labels):
+  #xdata and ydata as list
   pl = figure(width=800, height=350, x_axis_type="datetime")
 
   # add renderers
@@ -83,7 +65,36 @@ def wplot():
   pl.x_range = Range1d(loc_np[-1]-np.timedelta64(24, 'h'), loc_np[-1])
 
   return pl
+  
 
+
+ 
+def wplot():
+
+ #read csv file with temperture, pressure and humidity dataa
+ #--------------------#
+ data=pd.read_csv('weather_data.csv', sep=',', header=0, engine='python')
+ #localize time
+ time=np.array(data['isotime']) # in UTC isotime
+ dt=[datetime.datetime.strptime(X, "%Y-%m-%dT%H:%M:%S.%f" ) for X in time]
+ loc_np=local_time(dt)
+
+ 
+ #converstions for weather data
+ #--------------------# 
+ temp=np.array(data['temp']) * 9/5 + 32 # convert to F
+ temp_mcp9808=np.array(data['temp_mcp9808']) * 9/5 + 32 # convert to F
+ pressure=np.array(data['pressure']) *  0.000295299830714 #convert to inHg 
+ humidity=np.array(data['humidity']) # percentage
+ dew_p=[]
+ for i in range(len(humidity)):
+  dew_p.append((dew_point(data['temp'][i],data['humidity'][i])))
+ dew_p=np.array(dew_p) * 9/5 + 32 # convert to F
+
+
+ 
+ #plotting
+ #--------------------#
  labels={"title":"Air Temperature", "xaxis":"Date (Pacific Time)", \
          "yaxis":"Temperature / degrees F", "color":["red", "orange"]}
  p1=line_plot(loc_np, [temp, temp_mcp9808], labels)
@@ -99,6 +110,9 @@ def wplot():
 
  p = gridplot([[p1],[p2],[p3]])
 
+
+
+ #output
  #--------------------#
  
  # output to static HTML file
