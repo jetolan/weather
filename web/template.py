@@ -101,11 +101,12 @@ html_str3 = """
                 </header>
             <div class="row">
                <div class="col-md-9">
-                 <p style="font-size: 26px">Last update :   """+str(latest['time'])[:-10]+"""</p>
+                 <p style="font-size: 26px">Last update :   """+str(latest['time'])[:-10]+""" Pacific Time</p>
                  <p style="font-size: 26px">Air Temperature :   """+str(latest['temp'])[:-8]+""" &degF</p>
                  <p style="font-size: 26px">Barometric Pressure :   """+str(latest['pressure'])[:-8]+""" inHg</p>
                  <p style="font-size: 26px">Relative Humidity :   """+str(latest['humidity'])[:-8]+""" %</p>
                  <p style="font-size: 26px">Dew Point :   """+str(latest['dew_point'])[:-8]+""" &degF</p>
+                 <p style="font-size: 26px">24 Hour Rainfall :   """+' NAN '+""" inches</p>
                </div>
             </div>
       </div> 
@@ -152,7 +153,7 @@ html_str5 = """
                  <center>
                  <a href="""+str(latest['photo'])+""">
                  <img src="""+str(latest['photo'])+""" alt="latest picture" style="width:50%;height:50%;border:3;"></a>
-                 <p style="font-size: 18px">Capture time : """+str(latest['photo'][15:-4])+"""</p>
+                 <p style="font-size: 18px">Capture time : """+str(latest['photo'][15:-4])+""" UTC </p>
                 
                  </center>
             </div>
