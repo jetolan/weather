@@ -28,11 +28,14 @@ def wplot():
   return loc_dt
  
  loc_dt=[to_pacific(X) for X in dt]
- loc_dt_np=[np.datetime64(x) for x in loc_dt]
- 
- #hack to make datetime64 in Pacific for bokeh plotting
- loc_np=[X-np.timedelta64(7, 'h') for X in loc_dt_np]
 
+ #hack to make datetime64 in Pacific for bokeh plotting
+ loc_np=[]
+ for i in range(len(loc_dt)):
+    shift=int(str(loc_dt[i])[-4:-3]) #datetime contains tzinfo
+    utc_np=np.datetime64(loc_dt[i])
+    loc_np.append(utc_np-np.timedelta64(shift, 'h')) #subtract timezone
+ 
 
  def dew_point(T, RH):
   #from https://en.wikipedia.org/wiki/Dew_point
