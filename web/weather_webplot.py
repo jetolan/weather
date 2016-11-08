@@ -44,7 +44,7 @@ def dew_point(T, RH):
 
 
   
-def line_plot(xdata, ydata, labels):
+def line_plot(xdata, ydata, labels, now):
   #xdata and ydata as list
   pl = figure(width=800, height=350, x_axis_type="datetime")
 
@@ -60,14 +60,50 @@ def line_plot(xdata, ydata, labels):
   pl.yaxis.axis_label = labels['yaxis']
   pl.ygrid.band_fill_color="grey"
   pl.ygrid.band_fill_alpha = 0.1
-  
+
   # set default xaxis range to most recent day
-  pl.x_range = Range1d(loc_np[-1]-np.timedelta64(24, 'h'), loc_np[-1])
-
-  return pl
+  pl.x_range = Range1d(now-np.timedelta64(24, 'h'), now)
   
+  return pl
 
 
+ 
+def rain_bin(data,now):
+    dt=[datetime.datetime.strptime(X, "%Y-%m-%dT%H:%M:%S.%f" ) for X in data['isotime']]
+    dt_np = np.array(dt)
+
+    #first date:
+    d0=datetime.datetime(int(dt[0].year), int(dt[0].month), int(dt[0].day), int(dt[0].hour))
+ 
+    #bin rain data into intervals
+    #length of binning interval:
+    interval=30 #min
+
+    #conversion from tips to inches of rain:    
+    tip_conversion=.13  #made up number
+
+    dates=[]
+    val=[]
+    #find rainfall in interval
+    while d0<now:    
+     dates.append(d0)
+     d1=d0+datetime.timedelta(minutes=interval)
+     mask = (dt_np >= d0) & (dt_np < d1)
+     val.append(np.sum(mask)*tip_conversion)
+     d0=d1
+
+    
+    #double points to make bar plot
+    xarray=[]
+    yarray=[]
+    for d in range(len(dates)-1):
+     xarray.append(dates[d])
+     xarray.append(dates[d+1])
+     yarray.append(val[d])
+     yarray.append(val[d])  #repeat value twice, shifting indices
+
+    return xarray, yarray 
+ 
  
 def wplot():
 
@@ -79,6 +115,15 @@ def wplot():
  dt=[datetime.datetime.strptime(X, "%Y-%m-%dT%H:%M:%S.%f" ) for X in time]
  loc_np=local_time(dt)
 
+ #pdb.set_trace() 
+ 
+ #read csv file with rainfall data
+ #--------#
+ rain_data=pd.read_csv('rain_data.csv', sep=',', header=0, engine='python')
+ #bin rain data
+ xarray_utc, yarray = rain_bin(rain_data, dt[-1])
+ xarray=local_time(xarray_utc)
+ 
  
  #converstions for weather data
  #--------------------# 
@@ -97,18 +142,24 @@ def wplot():
  #--------------------#
  labels={"title":"Air Temperature", "xaxis":"Date (Pacific Time)", \
          "yaxis":"Temperature / degrees F", "color":["red", "orange"]}
- p1=line_plot(loc_np, [temp, temp_mcp9808], labels)
+ p1=line_plot(loc_np, [temp, temp_mcp9808], labels, loc_np[-1])
+
  
  labels={"title":"Barometric Pressure", "xaxis":"Date (Pacific Time)", \
           "yaxis":"Pressure / inHg","color":["green"]}
- p2=line_plot(loc_np, [pressure], labels)
+ p2=line_plot(loc_np, [pressure], labels, loc_np[-1])
 
+ 
  labels={"title":"Relative Humidity", "xaxis":"Date (Pacific Time)", \
           "yaxis":"Humdity / Percent", "color":["navy"]}
- p3=line_plot(loc_np, [humidity], labels)
+ p3=line_plot(loc_np, [humidity], labels, loc_np[-1])
 
+ labels={"title":"Rainfall", "xaxis":"Date (Pacific Time)", \
+          "yaxis":"inches", "color":["blue"]}
 
- p = gridplot([[p1],[p2],[p3]])
+ p4=line_plot(xarray, [yarray], labels, loc_np[-1])
+ 
+ p = gridplot([[p1],[p2],[p3],[p4]])
 
 
 
