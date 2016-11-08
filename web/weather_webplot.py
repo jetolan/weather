@@ -176,6 +176,7 @@ def wplot():
  #get latest photo
  dirname='pictures/'
  photos = filter(lambda x: '.jpg' in x.lower(),os.listdir(dirname+'.'))
+ photos = np.sort(photos)
  
  #also output latest values
  latest={'time':str(loc_np[-1]), 'temp':temp[-1], 'pressure':pressure[-1], \
