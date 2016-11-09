@@ -80,7 +80,12 @@ def rain_bin(data,now):
     interval=30 #min
 
     #conversion from tips to inches of rain:    
-    tip_conversion=.13  #made up number
+    #2tips = 1/2 tsp = 2.46 mL = 2.46cm^3
+    #diameter of funnel = 3 7/8 inch = 9.8425 cm
+    #Area = (9.8425/2)**2*pi=76.085cm^2
+    #2 tip = 2.46 / 76.085 cm = 0.03233cm = 0.0127inches
+    #1 tip = 0.00635
+    tip_conversion=0.00635
 
     dates=[]
     val=[]
