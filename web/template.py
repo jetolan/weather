@@ -106,7 +106,7 @@ html_str3 = """
                  <p style="font-size: 26px">Barometric Pressure :   """+str(latest['pressure'])[:-8]+""" inHg</p>
                  <p style="font-size: 26px">Relative Humidity :   """+str(latest['humidity'])[:-8]+""" %</p>
                  <p style="font-size: 26px">Dew Point :   """+str(latest['dew_point'])[:-8]+""" &degF</p>
-                 <p style="font-size: 26px">24 Hour Rainfall :   """+' NAN '+""" inches</p>
+                 <p style="font-size: 26px">24 Hour Rainfall :   """+str(latest['rainfall'])+""" inches</p>
                </div>
             </div>
       </div> 
