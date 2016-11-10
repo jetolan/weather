@@ -119,8 +119,6 @@ def wplot():
  time=np.array(data['isotime']) # in UTC isotime
  dt=[datetime.datetime.strptime(X, "%Y-%m-%dT%H:%M:%S.%f" ) for X in time]
  loc_np=local_time(dt)
-
- #pdb.set_trace() 
  
  #read csv file with rainfall data
  #--------#
@@ -128,7 +126,11 @@ def wplot():
  #bin rain data
  xarray_utc, yarray = rain_bin(rain_data, dt[-1])
  xarray=local_time(xarray_utc)
- 
+ #make 24hr rain total:
+ int24=np.array(xarray)>(xarray[-1]-np.timedelta64(24, 'h'))
+ int24[::2]=False #don't double count bar plotted xarray
+ yarray_np=np.array(yarray)
+ rain24hr=np.sum(yarray_np[int24]) 
  
  #converstions for weather data
  #--------------------# 
@@ -185,7 +187,8 @@ def wplot():
  
  #also output latest values
  latest={'time':str(loc_np[-1]), 'temp':temp[-1], 'pressure':pressure[-1], \
-         'humidity':humidity[-1], 'dew_point':dew_p[-1], 'photo':dirname+photos[-1]}
+         'humidity':humidity[-1], 'dew_point':dew_p[-1], \
+         'photo':dirname+photos[-1], 'rainfall':rain24hr}
  
  return script, div, latest
 
