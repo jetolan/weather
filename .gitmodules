@@ -10,3 +10,6 @@
 [submodule "Adafruit_Python_ADS1x15"]
 	path = Adafruit_Python_ADS1x15
 	url = https://github.com/adafruit/Adafruit_Python_ADS1x15.git
+[submodule "subfact_pi_ina219"]
+	path = subfact_pi_ina219
+	url = https://github.com/scottjw/subfact_pi_ina219
