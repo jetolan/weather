@@ -125,28 +125,38 @@
       <header>
         <h3>Hardware</h3>
       </header>
-      <p style="font-size: 18px">The weather station consists of a Raspberry Pi 3 and a set of sensors. 
-     
-    </article>
+      <p style="font-size: 18px">The weather station consists of a Raspberry Pi 3 and a set of sensors.
+	<h4>Computer</h4>
+        </header>
+        <p style="font-size: 18px">A Raspberry Pi 3 provides recording and transmission from the weather station. On average, it uses ?100mA? at 5V. 
+	<h4>Solar panel</h4>
+        </header>
+        <p style="font-size: 18px">A 25W solar panel () provides power to recharge the battery. The 12V of the panel is stepped down to 5V using a buck converter (). 
+        <h4>Battery</h4>
+        </header>
+        <p style="font-size: 18px">A 22000mAh Lithium battery (RAVpower RP-PB052) provides power for the pi zero. 
+         <h4>Thermometer, barometer and hygrometer</h4>
+        </header>
+        <p style="font-size: 18px">I've used a conveniently packaged Adafruit BME280 sensor. Currently, this is $20, which is not the cheapest, but the convienece of having all three in one package won me over. 
+        <h4>Rain Gauge</h4>
+        </header>
+        <p style="font-size: 18px">I constructed an inexpensive tipping rain gauge from an empty coconut oil jar, a emptpty juice jar, threaded rod, brass tube and a funnel. Each tip recorded using a reed switch connected to the GPIO header on the pi zero.
+   </article>
   </div>
   
-  <div class="col-md-6">
+  <div class="col-md-3">
     <article class="education">
-      <img src="images/keck_revD.png">
+      <img src="images/corral_lassen.png">
     </article>
   </div>
   
 </div>
 
+<br>
 <!-- NEXT ROW -->
 
 <div class="row">
-  
-  <div class="col-md-6">
-    <article class="education">
-      <img src="images/History-of-the-Universe-BICEP3.png">
-    </article>
-  </div>
+ 
   
   <div class="col-md-6">
     <article class="education">
@@ -154,13 +164,19 @@
         <h3>Software</h3>
       </header>
       <p style="font-size: 18px"> Data is collected using an I2C protocol, which allows multiple devices to operate simultaneously.
-	
+      <p style="font-size: 18px"> A python script is run every 5 minutes collecting temperature, pressure and humididty data. The rain gauge is monitored continuously. A picture is taken every day at noon. Code can be found on my github repo:<a href="https://github.com/jetolan/weather/">https://github.com/jetolan/weather/</a>.
+      <p style="font-size: 18px"> A cron job controls the transfer of the csv files and image files to an AWS EC2 instance, which hosts the web with a simple static apache server. The website is updated every 10 minutes using a cron job.
+      <p style="font-size: 18px"> The web display employees the python package bokeh, which conveniently converts python figures into interactive web javascript objects.      	
+    </article>
+  </div>
+
+
+  <div class="col-md-6">
+    <article class="education">
+      <img src="images/corral_lassen.png">
     </article>
   </div>
 </div>
-
-
-
 <!-- END ROW -->
 
 </div>
