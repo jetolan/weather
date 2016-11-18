@@ -12,7 +12,7 @@ import os
 import time
 import sys
 
-pin = 6
+pin = 4
 
 def bucket_tipped(channel):
 
