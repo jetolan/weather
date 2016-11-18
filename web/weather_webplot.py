@@ -135,7 +135,7 @@ def wplot():
  #converstions for weather data
  #--------------------# 
  temp=np.array(data['temp']) * 9/5 + 32 # convert to F
- temp_mcp9808=np.array(data['temp_mcp9808']) * 9/5 + 32 # convert to F
+ #temp_mcp9808=np.array(data['temp_mcp9808']) * 9/5 + 32 # convert to F
  pressure=np.array(data['pressure']) *  0.000295299830714 #convert to inHg 
  humidity=np.array(data['humidity']) # percentage
  dew_p=[]
@@ -147,10 +147,12 @@ def wplot():
  
  #plotting
  #--------------------#
+ #labels={"title":"Air Temperature", "xaxis":"Date (Pacific Time)", \
+ #        "yaxis":"Temperature / degrees F", "color":["red", "orange"]}
+ #p1=line_plot(loc_np, [temp, temp_mcp9808], labels, loc_np[-1])
  labels={"title":"Air Temperature", "xaxis":"Date (Pacific Time)", \
-         "yaxis":"Temperature / degrees F", "color":["red", "orange"]}
- p1=line_plot(loc_np, [temp, temp_mcp9808], labels, loc_np[-1])
-
+         "yaxis":"Temperature / degrees F", "color":["red"]}
+ p1=line_plot(loc_np, [temp], labels, loc_np[-1])
  
  labels={"title":"Barometric Pressure", "xaxis":"Date (Pacific Time)", \
           "yaxis":"Pressure / inHg","color":["green"]}
