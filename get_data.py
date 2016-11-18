@@ -1,8 +1,10 @@
 from Adafruit_Python_BME280 import Adafruit_BME280
-from Adafruit_MCP9808 import MCP9808
+from subfact_pi_ina219 import Subfact_ina219
+#from Adafruit_MCP9808 import MCP9808
 import pandas as pd
 import datetime
 import os
+
 
 #get timestamp
 #will need clock for non network connected device
@@ -23,11 +25,16 @@ humidity = sensor.read_humidity()
 #sensor.begin()
 #temp = sensor.readTempC()
 
+#get data from ina219
+ina=Subfact_ina219.INA219()
+BV=ina.getBusVoltage_V()
+I=ina.getCurrent_mA()
+power=BV*I
 
 #write to dataframe
 #df = pd.DataFrame({'isotime' : pd.Series(now), 'temp' : pd.Series(degrees),'temp_mcp9808' : pd.Series(temp), 'pressure' : pd.Series(pascals), 'humidity' : pd.Series(humidity)}, columns=['isotime', 'temp', 'temp_mcp9808','pressure', 'humidity'])
 
-df = pd.DataFrame({'isotime' : pd.Series(now), 'temp' : pd.Series(degrees), 'pressure' : pd.Series(pascals), 'humidity' : pd.Series(humidity)}, columns=['isotime', 'temp','pressure', 'humidity'])
+df = pd.DataFrame({'isotime' : pd.Series(now), 'temp' : pd.Series(degrees), 'pressure' : pd.Series(pascals), 'humidity' : pd.Series(humidity), 'solarpower':pd.Series(power)}, columns=['isotime', 'temp','pressure', 'humidity', 'solarpower'])
 
 #write to file
 file='/home/pi/weather/weather_data.csv'
