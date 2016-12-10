@@ -3,7 +3,7 @@ import subprocess
 import datetime
 from pytz import timezone
 
-subprocess.Popen('./address.sh')
+subprocess.Popen('/home/pi/weather/web/address.sh')
 dt=datetime.datetime.now()
 loc_tz = timezone('US/Pacific')
 utc_tz = timezone('UTC')
@@ -28,7 +28,7 @@ html_str3 = """
 Raspi3 = 
 """
 
-txt=open('address.txt', 'r')
+txt=open('/home/pi/weather/web/address.txt', 'r')
 html_str4 = txt.read()
 
 html_str5 = """
