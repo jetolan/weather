@@ -2,4 +2,4 @@
 
 #curl ifconfig.me > address.txt
 
-lynx --dump http://ipecho.net/plain > address.txt
+lynx --dump http://ipecho.net/plain > /home/pi/weather/web/address.txt
