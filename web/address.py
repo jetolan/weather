@@ -29,7 +29,7 @@ Raspi3 =
 """
 
 txt=open('/home/pi/weather/web/address.txt', 'r')
-html_str4 = txt.read()
+html_str4 = str(txt.read())
 
 html_str5 = """
    </body>
