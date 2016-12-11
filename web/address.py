@@ -39,6 +39,6 @@ str_out= html_str1 + html_str2 + html_str3 + html_str4 + html_str5
 
 ##################################################################
 
-Html_file= open("address.html","w")
+Html_file= open("/home/pi/weather/web/address.html","w")
 Html_file.write(str_out)
 Html_file.close()
