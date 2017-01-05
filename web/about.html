@@ -67,24 +67,6 @@
     </nav>
     <!--===============================================================================-->
 
-    <!--===============================================================================-->
-    <!-- welcome begins -->
-    <section id="page-welcome" class="page-welcome">
-      <div>
-          <ul class="slider-controls">
-              <li><a id="vegas-next" class="next" href="#"></a></li>
-              <li><a id="vegas-prev" class="prev" href="#"></a></li>
-          </ul>
-        </div>
-        <div class="container">
-            <div class="row">
-                <header class="centered">
-                    <h1>Warner Valley Weather Station</h1>
-                </header>
-            </div>
-        </div>
-    </section><!-- welcome ends -->
-    <!--===============================================================================-->
 
    <!--===============================================================================-->
     <!-- about me begins -->
@@ -99,8 +81,8 @@
                  <div class="profile"><img src="images/corral_lassen.png" alt="profile"/></div> 
               </div>
                <div class="col-md-9">
-                 <p style="font-size: 18px">Since the road is closed from Chester, it is nice to know what is going on in the valley!</p>
-                 <p style="font-size: 18px"> The weather station is located above Lee Camp </p>
+                 <p style="font-size: 18px">For fun! To monitor rainfall and temperatures. To learn about raspberry pis, and as a prototype for a 3G connected weather station in remote areas.</p>
+                 <p style="font-size: 18px"> This weather station is located in Atherton, CA </p>
        
                </div>
             </div>
@@ -128,25 +110,33 @@
       <p style="font-size: 18px">The weather station consists of a Raspberry Pi 3 and a set of sensors.
 	<h4>Computer</h4>
         </header>
-        <p style="font-size: 18px">A Raspberry Pi 3 provides recording and transmission from the weather station. On average, it uses ?100mA? at 5V. 
+        <p style="font-size: 18px">A Raspberry Pi Zero provides recording and transmission from the weather station. On average, it uses 100mA at 5V. 
 	<h4>Solar panel</h4>
         </header>
-        <p style="font-size: 18px">A 25W solar panel () provides power to recharge the battery. The 12V of the panel is stepped down to 5V using a buck converter (). 
+        <p style="font-size: 18px">A <a href="https://www.amazon.com/gp/product/B01G82P6L6/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1"> 25W solar panel</a> provides power to recharge the battery. The panel cost $38, but I bought a $39 <a href="https://www.amazon.com/gp/product/B00ZANXXSS/ref=oh_aui_detailpage_o03_s00?ie=UTF8&psc=1"> mounting bracket</a>, so the solar ended up being the most expensive part of the project. The 12V of the panel is monitored with a AdaFruit INA219 High side DC current monitor. This lets me monitor how much power the panel is collecting. 
         <h4>Battery</h4>
         </header>
-        <p style="font-size: 18px">A 22000mAh Lithium battery (RAVpower RP-PB052) provides power for the pi zero. 
+        <p style="font-size: 18px">A <a href="https://www.amazon.com/gp/product/B006X98A7C/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1"> 3.3Ah 12V lead acid battery</a> provides power for the pi zero. The battery cost $15. I previously tried a Li-ion battery but the charge controler prevented the battery from switching between charging and outputting smoothly. The battery is charged using a $10 <a href="https://www.amazon.com/gp/product/B0191QN92Y/ref=oh_aui_detailpage_o05_s01?ie=UTF8&psc=1"> solar panel charge controler </a>.
          <h4>Thermometer, barometer and hygrometer</h4>
         </header>
         <p style="font-size: 18px">I've used a conveniently packaged Adafruit BME280 sensor. Currently, this is $20, which is not the cheapest, but the convienece of having all three in one package won me over. 
         <h4>Rain Gauge</h4>
         </header>
-        <p style="font-size: 18px">I constructed an inexpensive tipping rain gauge from an empty coconut oil jar, a emptpty juice jar, threaded rod, brass tube and a funnel. Each tip recorded using a reed switch connected to the GPIO header on the pi zero.
+        <p style="font-size: 18px">I constructed an inexpensive tipping rain gauge from an empty coconut oil jar, a empty juice jar, threaded rod, brass tube and a funnel. Each tip recorded using a reed switch connected to the GPIO header on the pi zero.
    </article>
   </div>
   
   <div class="col-md-3">
     <article class="education">
-      <img src="images/corral_lassen.png">
+      <img src="images/IMG_4028.jpg">
+    </article>
+    <br>
+    <article class="education">
+      <img src="images/IMG_4029.jpg">
+    </article>
+    <br>
+    <article class="education">
+      <img src="images/IMG_4034.jpg">
     </article>
   </div>
   
@@ -171,9 +161,9 @@
   </div>
 
 
-  <div class="col-md-6">
+  <div class="col-md-3">
     <article class="education">
-      <img src="images/corral_lassen.png">
+      <img src="images/IMG_4066.jpg">
     </article>
   </div>
 </div>

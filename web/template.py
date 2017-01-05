@@ -17,7 +17,7 @@ html_str1 = """
     <meta name="author" content="">
     <link rel="icon" href="images/favicon.ico">
 
-    <title>Warner Weather</title>
+    <title>JET's Weather Station</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -101,6 +101,7 @@ html_str3 = """
                 </header>
             <div class="row">
                <div class="col-md-9">
+                 <p style="font-size: 26px">Location :   Lat = 37.47, Lon = -122.19, Elev = 72ft </p>
                  <p style="font-size: 26px">Last update :   """+str(latest['time'])[:-10]+""" Pacific Time</p>
                  <p style="font-size: 26px">Air Temperature :   """+str(latest['temp'])[:-8]+""" &degF</p>
                  <p style="font-size: 26px">Barometric Pressure :   """+str(latest['pressure'])[:-8]+""" inHg</p>
