@@ -132,7 +132,7 @@ def wplot():
  yarray_np=np.array(yarray)
  rain24hr=np.sum(yarray_np[int24]) 
  
- #converstions for weather data
+ #conversions for weather data
  #--------------------# 
  temp=np.array(data['temp']) * 9/5 + 32 # convert to F
  #temp_mcp9808=np.array(data['temp_mcp9808']) * 9/5 + 32 # convert to F
@@ -142,8 +142,7 @@ def wplot():
  for i in range(len(humidity)):
   dew_p.append((dew_point(data['temp'][i],data['humidity'][i])))
  dew_p=np.array(dew_p) * 9/5 + 32 # convert to F
-
-
+ power=np.array(data['solarpower'])
  
  #plotting
  #--------------------#
@@ -160,17 +159,19 @@ def wplot():
 
  
  labels={"title":"Relative Humidity", "xaxis":"Date (Pacific Time)", \
-          "yaxis":"Humdity / Percent", "color":["navy"]}
+          "yaxis":"Humidity / Percent", "color":["navy"]}
  p3=line_plot(loc_np, [humidity], labels, loc_np[-1])
 
  labels={"title":"Rainfall", "xaxis":"Date (Pacific Time)", \
           "yaxis":"inches", "color":["blue"]}
 
  p4=line_plot(xarray, [yarray], labels, loc_np[-1])
+
+ labels={"title":"Solar Power", "xaxis":"Date (Pacific Time)", \
+          "yaxis":"power / mW", "color":["navy"]}
+ p5=line_plot(loc_np, [power], labels, loc_np[-1])
  
- p = gridplot([[p1],[p2],[p3],[p4]])
-
-
+ p = gridplot([[p1],[p2],[p3],[p4],[p5]])
 
  #output
  #--------------------#
