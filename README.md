@@ -1,7 +1,7 @@
 Collects data from sensors and writes to csv file
 
 ### set static ip:
-
+https://www.raspberrypi.org/learning/networking-lessons/rpi-static-ip-address/
 add:
 ```
 interface eth0
