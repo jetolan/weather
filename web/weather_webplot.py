@@ -1,6 +1,7 @@
 import numpy as np
 import os
 import datetime
+import glob
 from datetime import timedelta
 from pytz import utc, timezone
 import pandas as pd
@@ -114,7 +115,7 @@ def wplot():
 
  #read csv file with temperture, pressure and humidity dataa
  #--------------------#
- data=pd.read_csv('weather_data.csv', sep=',', header=0, engine='python')
+ data=pd.read_csv('weather_data.csv', sep=',', header=0)
  #localize time
  time=np.array(data['isotime']) # in UTC isotime
  dt=[datetime.datetime.strptime(X, "%Y-%m-%dT%H:%M:%S.%f" ) for X in time]
@@ -122,7 +123,7 @@ def wplot():
  
  #read csv file with rainfall data
  #--------#
- rain_data=pd.read_csv('rain_data.csv', sep=',', header=0, engine='python')
+ rain_data=pd.read_csv('rain_data.csv', sep=',', header=0)
  #bin rain data
  xarray_utc, yarray = rain_bin(rain_data, dt[-1])
  xarray=local_time(xarray_utc)
@@ -185,9 +186,12 @@ def wplot():
 
  #get latest photo
  dirname='pictures/'
- photos = filter(lambda x: '.jpg' in x.lower(),os.listdir(dirname+'.'))
- photos = np.sort(photos)
- 
+ files=glob.glob(dirname+'.jpg')
+ if any(files):
+  photos = np.sort(photos)
+ else:
+  photos="none.jpg"
+  
  #also output latest values
  latest={'time':str(loc_np[-1]), 'temp':temp[-1], 'pressure':pressure[-1], \
          'humidity':humidity[-1], 'dew_point':dew_p[-1], \
