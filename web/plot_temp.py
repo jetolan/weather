@@ -6,7 +6,7 @@ import datetime
 from pytz import utc, timezone
 
 #read csv file with data
-data=pd.read_csv('weather_data.csv', sep=',', header=0, engine='python')
+data=pd.read_csv('weather_data.csv', sep=',', header=0)
 
 #time data
 time=np.array(data['isotime']) # in UTC isotime
