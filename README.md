@@ -24,3 +24,6 @@ to /etc/dhcpcd.conf
 */11 * * * * /bin/sh /home/pi/weather/transfer.sh
 0   19 * * * python /home/pi/weather/takepicture.py
 ```
+### ssh
+on local network (boathouse):
+ssh -X pi@192.168.8.52
