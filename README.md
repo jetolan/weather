@@ -1,8 +1,12 @@
 Collects data from sensors and writes to csv file
 
-### set static ip:
+### ~~set static ip:~~
+THIS is probably a bad idea!! Don't do it (2020-07-02) messes up time and apt-get
+
 https://www.raspberrypi.org/learning/networking-lessons/rpi-static-ip-address/
 add:
+
+
 ```
 interface eth0
 static ip_address=192.168.1.52/24
@@ -13,6 +17,7 @@ interface wlan0
 static ip_address=192.168.1.52/24
 static routers=192.168.1.1
 static domain_name_servers=192.168.1.1
+
 ```
 to /etc/dhcpcd.conf
 
