@@ -13,8 +13,6 @@ with open("README.md", 'r') as f:
           author_email='jamie.tolan@gmail.com',
           url='https://github.com/jetolan/weather',
           license='MIT',
-          packages=['Adafruit_Python_BME280', 'Adafruit_Python_MCP9808'],
-          package_dir={'Adafruit_Python_BME280': 'Adafruit_Python_BME280',
-                       'Adafruit_Python_MCP9808': 'Adafruit_Python_MCP9808'},
-          install_requires=['numpy', 'pandas', 'RPI.GPIO', 'adafruit-blinka']
+          install_requires=['numpy', 'pandas', 'RPI.GPIO', 'adafruit-blinka',
+                            'adafruit-circuitpython-ina219', 'adafruit-circuitpython-bme280']
           )
