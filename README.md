@@ -1,5 +1,22 @@
 Collects data from sensors and writes to csv file
 
+#SETUP
+##################
+enable ssh, i2c, camera
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install -y python3-pip python-smbus i2c-tools
+sudo pip3 install --upgrade setuptools
+
+git clone https://github.com/jetolan/weather
+cd weather
+sudo python3 setup.py install
+
+sudo i2cdetect -y 1
+
+################
+
 ### ~~set static ip:~~
 THIS is probably a bad idea!! Don't do it (2020-07-02) messes up time and apt-get
 
@@ -24,10 +41,10 @@ to /etc/dhcpcd.conf
 ### crontab:
 
 ```
-@reboot python /home/pi/weather/reed_switch.py
-*/10  * * * * python /home/pi/weather/get_data.py
+@reboot python3 /home/pi/weather/reed_switch.py
+*/10  * * * * python3 /home/pi/weather/get_data.py
 */11 * * * * /bin/sh /home/pi/weather/transfer.sh
-0   19 * * * python /home/pi/weather/takepicture.py
+0   19 * * * python3 /home/pi/weather/takepicture.py
 ```
 ### ssh
 on local network (yachthouse) TP-LINK Archer C7:
