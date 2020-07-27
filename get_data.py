@@ -30,7 +30,7 @@ power = BV*I
 # write to dataframe
 df = pd.DataFrame({'isotime': pd.Series(now),
                    'temp': pd.Series(degrees),
-                   'pressure': pd.Series(pascals),
+                   'pressure': pd.Series(hectopascals*100),
                    'humidity': pd.Series(humidity)},
                   columns=['isotime', 'temp', 'pressure', 'humidity'])
 
