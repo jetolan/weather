@@ -43,7 +43,6 @@ to /etc/dhcpcd.conf
 ```
 @reboot python3 /home/pi/weather/reed_switch.py
 */10  * * * * python3 /home/pi/weather/get_data.py
-*/11 * * * * /bin/sh /home/pi/weather/transfer.sh
 0   19 * * * python3 /home/pi/weather/takepicture.py
 ```
 ### ssh
