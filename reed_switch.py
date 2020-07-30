@@ -1,9 +1,8 @@
+#!/usr/bin/python
 
 # based on:
 # https://www.raspberrypi.org/learning/weather-station-guide/rain-gauge.md
 
-
-#!/usr/bin/python
 import RPi.GPIO as GPIO
 import datetime
 import pandas as pd
@@ -15,7 +14,9 @@ pin = 4
 
 
 def bucket_tipped(channel):
-
+    """
+    Each time GPIO is detected, write new line to csv
+    """
     now = datetime.datetime.now().isoformat()
     print("rain gauge tip at : " + str(now))
 
@@ -30,15 +31,15 @@ def bucket_tipped(channel):
             df.to_csv(f, header=False)
 
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(pin, GPIO.IN, GPIO.PUD_UP)
-GPIO.add_event_detect(
-    pin, GPIO.FALLING, callback=bucket_tipped, bouncetime=300)
-
-# GPIO.remove_event_detect(channel)
-
-
 def main_loop():
+    """
+    Continuous loop for constant monitoring
+    """
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(pin, GPIO.IN, GPIO.PUD_UP)
+    GPIO.add_event_detect(
+        pin, GPIO.FALLING, callback=bucket_tipped, bouncetime=300)
+
     while 1:
         # do your stuff...
         time.sleep(0.1)
