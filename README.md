@@ -32,3 +32,6 @@ to /etc/dhcpcd.conf
 ### ssh
 on local network (yachthouse) TP-LINK Archer C7:
 ssh -X pi@192.168.1.52
+
+### wifi drivers
+https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=62371
