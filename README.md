@@ -49,5 +49,8 @@ to /etc/dhcpcd.conf
 on local network (yachthouse) TP-LINK Archer C7:
 ssh -X pi@192.168.1.52
 
+find ip address with 
+arp -a
+
 ### wifi drivers
 https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=62371
