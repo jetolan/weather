@@ -11,21 +11,29 @@ import adafruit_ina219
 # will need clock for non network connected device
 now = datetime.datetime.now().isoformat()
 
-# get data from BME280
-i2c = busio.I2C(board.SCL, board.SDA)
-bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
-degrees = bme280.temperature
-humidity = bme280.humidity
-hectopascals = bme280.pressure
 
+# get data from BME280
+try:
+    i2c = busio.I2C(board.SCL, board.SDA)
+    bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
+    degrees = bme280.temperature
+    humidity = bme280.humidity
+    hectopascals = bme280.pressure
+except:
+    degrees = np.nan
+    humidity = np.nan
+    hectopascals = np.nan
 
 # get data from ina219
-i2c = busio.I2C(board.SCL, board.SDA)
-ina219 = adafruit_ina219.INA219(i2c)
-BV = ina219.bus_voltage
-SV = ina219.shunt_voltage / 1000
-I = ina219.current
-power = BV*I
+try:
+    i2c = busio.I2C(board.SCL, board.SDA)
+    ina219 = adafruit_ina219.INA219(i2c)
+    BV = ina219.bus_voltage
+    SV = ina219.shunt_voltage / 1000
+    I = ina219.current
+    power = BV*I
+except:
+    power = np.nan
 
 # write to dataframe
 df = pd.DataFrame({'isotime': pd.Series(now),
