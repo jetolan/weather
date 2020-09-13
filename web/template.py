@@ -1,7 +1,7 @@
 from weather_webplot import wplot
 
 
-[script,div,latest] = wplot()
+[script, div, latest] = wplot()
 
 ##################################################################
 
@@ -35,15 +35,13 @@ html_str1 = """
     <link rel="stylesheet" href="css/colors/green.css">
     
     <!-- Bokeh --> 
-    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.3.min.css" type="text/css" />
-    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.3.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-1.1.0.min.js"></script>
 
 """
 ##################################################################
 
 
-html_str2=script
-
+html_str2 = script
 
 
 ##################################################################
@@ -211,12 +209,10 @@ html_str5 = """
 
 ##################################################################
 
-
-str_out=html_str1+html_str2+html_str3+html_str4+html_str5
-
+str_out = html_str1+html_str2+html_str3+html_str4+html_str5
 
 ##################################################################
 
-Html_file= open("index.html","w")
+Html_file = open("index.html", "w")
 Html_file.write(str_out)
 Html_file.close()
