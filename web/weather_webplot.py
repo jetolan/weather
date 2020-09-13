@@ -15,20 +15,16 @@ def local_time(dt):
     # input is list of datetime, output is list of np.datetime
 
     def to_pacific(dt):
-        utc_dt = utc.localize(dt)
-        loc_dt = utc_dt.astimezone(timezone('US/Pacific'))
+        ts = pd.Timestamp(dt)
+        utc_ts = ts.tz_localize('utc')
+        loc_ts = utc_ts.tz_convert('US/Pacific')
+        loc_dt = loc_ts.to_datetime64()
+
         return loc_dt
 
     loc_dt = [to_pacific(X) for X in dt]
 
-    # hack to make datetime64 in Pacific for bokeh plotting
-    loc_np = []
-    for i in range(len(loc_dt)):
-        shift = int(str(loc_dt[i])[-4:-3])  # datetime contains tzinfo
-        utc_np = np.datetime64(loc_dt[i])
-        loc_np.append(utc_np-np.timedelta64(shift, 'h'))  # subtract timezone
-
-    return loc_np
+    return loc_dt
 
 
 def dew_point(T, RH):
@@ -67,13 +63,12 @@ def line_plot(xdata, ydata, labels, now):
 
 
 def rain_bin(data, now):
-    dt = [datetime.datetime.strptime(X, "%Y-%m-%dT%H:%M:%S.%f")
-          for X in data['isotime']]
-    dt_np = np.array(dt)
+    dt_np = pd.to_datetime(pd.to_datetime(data.isotime).values)
+    now_dt = pd.to_datetime(now)
 
     # first date:
-    d0 = datetime.datetime(int(dt[0].year), int(
-        dt[0].month), int(dt[0].day), int(dt[0].hour))
+    d0 = datetime.datetime(int(dt_np[0].year), int(
+        dt_np[0].month), int(dt_np[0].day), int(dt_np[0].hour))
 
     # bin rain data into intervals
     # length of binning interval:
@@ -90,7 +85,7 @@ def rain_bin(data, now):
     dates = []
     val = []
     # find rainfall in interval
-    while d0 < now:
+    while d0 < now_dt:
         dates.append(d0)
         d1 = d0+datetime.timedelta(minutes=interval)
         mask = (dt_np >= d0) & (dt_np < d1)
@@ -115,15 +110,14 @@ def wplot():
     #--------------------#
     data = pd.read_csv('weather_data.csv', sep=',', header=0)
     # localize time
-    time = np.array(data['isotime'])  # in UTC isotime
-    dt = [datetime.datetime.strptime(X, "%Y-%m-%dT%H:%M:%S.%f") for X in time]
-    loc_np = local_time(dt)
+    time = pd.to_datetime(data.isotime).values
+    loc_np = local_time(time)
 
     # read csv file with rainfall data
     #--------#
     rain_data = pd.read_csv('rain_data.csv', sep=',', header=0)
     # bin rain data
-    xarray_utc, yarray = rain_bin(rain_data, dt[-1])
+    xarray_utc, yarray = rain_bin(rain_data, time[-1])
     xarray = local_time(xarray_utc)
     # make 24hr rain total:
     int24 = np.array(xarray) > (xarray[-1]-np.timedelta64(24, 'h'))
