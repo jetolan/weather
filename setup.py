@@ -13,7 +13,7 @@ with open("README.md", 'r') as f:
           author_email='jamie.tolan@gmail.com',
           url='https://github.com/jetolan/weather',
           license='MIT',
-          install_requires=['numpy', 'pandas', 'RPI.GPIO', 'adafruit-blinka',
+          install_requires=['RPI.GPIO', 'adafruit-blinka',
                             'adafruit_platformdetect',
                             'adafruit-circuitpython-ina219',
                             'adafruit-circuitpython-bme280']

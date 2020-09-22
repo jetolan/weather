@@ -5,7 +5,6 @@
 
 import RPi.GPIO as GPIO
 import datetime
-import pandas as pd
 import os
 import time
 import sys
@@ -20,15 +19,20 @@ def bucket_tipped(channel):
     now = datetime.datetime.now().isoformat()
     print("rain gauge tip at : " + str(now))
 
-    df = pd.DataFrame({'isotime': pd.Series(now), 'rain_tip': pd.Series('1')})
-
     # write to file
     file = '/home/pi/weather/rain_data.csv'
+    columns = ['', 'isotime', 'rain_tip']
     if not os.path.exists(file):
-        df.to_csv(file, header=True)
-    else:
-        with open(file, 'a') as f:
-            df.to_csv(f, header=False)
+        with open(file, 'w') as fp:
+            writer = csv.DictWriter(fp, fieldnames=columns, delimiter=',')
+            writer.writeheader()
+
+    with open(file, mode='a+') as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=columns, delimiter=',')
+        writer.writerow({'': 0,
+                         'isotime': now,
+                         'rain_tip': 1,
+                         })
 
 
 def main_loop():
