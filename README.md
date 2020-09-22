@@ -7,7 +7,7 @@ enable ssh, i2c, camera
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install -y python3-pip python-smbus i2c-tools
-sudo pip3 install --upgrade setuptools cython
+sudo pip3 install --upgrade setuptools
 
 git clone https://github.com/jetolan/weather
 cd weather

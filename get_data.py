@@ -1,5 +1,4 @@
-import numpy as np
-import pandas as pd
+import csv
 import datetime
 import os
 
@@ -21,9 +20,9 @@ try:
     humidity = bme280.humidity
     hectopascals = bme280.pressure
 except:
-    degrees = np.nan
-    humidity = np.nan
-    hectopascals = np.nan
+    degrees = ''
+    humidity = ''
+    hectopascals = ''
 
 # get data from ina219
 try:
@@ -34,21 +33,22 @@ try:
     I = ina219.current
     power = BV*I
 except:
-    power = np.nan
-
-# write to dataframe
-df = pd.DataFrame({'isotime': pd.Series(now),
-                   'temp': pd.Series(degrees),
-                   'pressure': pd.Series(hectopascals*100),
-                   'humidity': pd.Series(humidity),
-                   'power': pd.Series(power)},
-                  columns=['isotime', 'temp', 'pressure', 'humidity', 'power'])
+    power = ''
 
 
-# write to file
+# write to csv
 file = '/home/pi/weather/weather_data.csv'
+columns = ['isotime', 'temp', 'pressure', 'humidity', 'power']
 if not os.path.exists(file):
-    df.to_csv(file, header=True)
-else:
-    with open(file, 'a') as f:
-        df.to_csv(f, header=False)
+    with open(file, 'w') as fp:
+        writer = csv.DictWriter(fp, fieldnames=columns, delimiter=',')
+        writer.writeheader()
+
+with open(file, mode='w+') as csv_file:
+    writer = csv.DictWriter(csv_file, fieldnames=columns, delimiter=',')
+    writer.writerow({'isotime': now,
+                     'temp': degrees,
+                     'pressure': (hectopascals*100),
+                     'humidity': humidity,
+                     'power': power,
+                     })
