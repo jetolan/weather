@@ -21,7 +21,7 @@ def bucket_tipped(channel):
 
     # write to file
     file = '/home/pi/weather/rain_data.csv'
-    columns = ['isotime', 'rain_tip']
+    columns = ['', 'isotime', 'rain_tip']
     if not os.path.exists(file):
         with open(file, 'w') as fp:
             writer = csv.DictWriter(fp, fieldnames=columns, delimiter=',')
@@ -29,7 +29,8 @@ def bucket_tipped(channel):
 
     with open(file, mode='a+') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=columns, delimiter=',')
-        writer.writerow({'isotime': now,
+        writer.writerow({'': 0,
+                         'isotime': now,
                          'rain_tip': 1,
                          })
 

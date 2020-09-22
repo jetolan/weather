@@ -38,7 +38,7 @@ except:
 
 # write to csv
 file = '/home/pi/weather/weather_data.csv'
-columns = ['isotime', 'temp', 'pressure', 'humidity', 'power']
+columns = ['', 'isotime', 'temp', 'pressure', 'humidity', 'power']
 if not os.path.exists(file):
     with open(file, 'w') as fp:
         writer = csv.DictWriter(fp, fieldnames=columns, delimiter=',')
@@ -46,7 +46,8 @@ if not os.path.exists(file):
 
 with open(file, mode='a+') as csv_file:
     writer = csv.DictWriter(csv_file, fieldnames=columns, delimiter=',')
-    writer.writerow({'isotime': now,
+    writer.writerow({'': 0,
+                     'isotime': now,
                      'temp': degrees,
                      'pressure': (hectopascals*100),
                      'humidity': humidity,
