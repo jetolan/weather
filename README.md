@@ -36,6 +36,12 @@ sudo crontab -e
 
 ################
 
+### Read directly off sd card:
+
+https://www.jeffgeerling.com/blog/2017/mount-raspberry-pi-sd-card-on-mac-read-only-osxfuse-and-ext4fuse
+
+###############
+
 ### ~~set static ip:~~
 THIS is probably a bad idea!! Don't do it (2020-07-02) messes up time and apt-get
 
