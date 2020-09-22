@@ -44,7 +44,7 @@ if not os.path.exists(file):
         writer = csv.DictWriter(fp, fieldnames=columns, delimiter=',')
         writer.writeheader()
 
-with open(file, mode='w+') as csv_file:
+with open(file, mode='a+') as csv_file:
     writer = csv.DictWriter(csv_file, fieldnames=columns, delimiter=',')
     writer.writerow({'isotime': now,
                      'temp': degrees,
