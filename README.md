@@ -31,7 +31,7 @@ sudo crontab -e
 ```
 @reboot python3 /home/pi/weather/reed_switch.py
 */10  * * * * python3 /home/pi/weather/get_data.py
-0   19 * * * python3 /home/pi/weather/takepicture.py
+0   12 * * * python3 /home/pi/weather/takepicture.py
 ```
 
 ################
