@@ -13,9 +13,6 @@ import credentials
 
 def generate_ip_list(ip_base):
     """
-    A dirty fill in for a CIDR mask, just to handle the possibility of
-    either a search over a range of IPs, or just a single IP, in SCP transfer.
-
     Parameters
     ----------
     ip_base : str
@@ -28,13 +25,6 @@ def generate_ip_list(ip_base):
         List of potential IP addresses matching the base input. If a range,
         will be 1 to 254.
 
-    Examples
-    --------
-    >>> from improc.gen import transfer
-    >>> print(transfer.generate_ip_list("192.168.1.1"))
-    ['192.168.1.1']
-    >>> print(transfer.generate_ip_list("192.168.1.")[:5])
-    ['192.168.1.1', '192.168.1.2', '192.168.1.3', '192.168.1.4', '192.168.1.5']
     """
 
     ip_base_split = ip_base.split(".")
@@ -42,11 +32,15 @@ def generate_ip_list(ip_base):
     if len(ip_base_nums) == 4:
         return [".".join(ip_base_nums)]
     elif len(ip_base_nums) == 3:
-        possibilities = map(str, range(1, 255))
+        first=[str(d) for d in range(100,121)]
+        second=[str(d) for d in range(1,21)]
+        third=[str(d) for d in range(21,100)]
+        fourth=[str(d) for d in range(121,255)]
+        possibilities=first+second+third+fourth
         return [".".join(ip_base_nums + [p]) for p in possibilities]
 
 
-def guess_system_ip(ip_base="192.168.1.", system=data_acq,
+def guess_system_ip(ip_base="192.168.1.", system=credentials.data_acq,
                     system_name="weather1"):
     """
     Looks over a network for a system that can be logged into via SSH
@@ -94,20 +88,13 @@ def guess_system_ip(ip_base="192.168.1.", system=data_acq,
                     paramiko.ssh_exception.SSHException,
                     paramiko.ssh_exception.NoValidConnectionsError,
                     paramiko.ssh_exception.AuthenticationException):
-                # TODO: catching AuthenticationException is dangerous; we might
-                #       never realize we're using the wrong credentials. it is
-                #       here because there are other users on the local
-                #       network.
 
                 continue
         osops.safe_sleep(10)
 
 
-def _check_system_name(ip_address, system_name, system=data_acq):
+def _check_system_name(ip_address, system_name, system=credentials.data_acq):
     """
-    Check that the provided system name and the hostname of the host at the provided IP address are
-    consistent.
-
     Parameters
     ----------
     ip_address : str
@@ -176,14 +163,6 @@ def get_chars(s):
     -------
     chars : str
         Given string, with only characters remaining.
-
-    Example
-    -------
-    >>> from improc.gen import strops
-    >>> test_str = "123abc456def"
-    >>> chars = strops.get_chars(test_str)
-    >>> print(chars)
-    abcdef
     """
 
     chars = "".join(re.findall("[a-zA-Z]+", s))
@@ -204,14 +183,6 @@ def get_nums(s):
     -------
     chars : str
         Given string, with only characters remaining.
-
-    Example
-    -------
-    >>> from improc.gen import strops
-    >>> test_str = "123abc456def"
-    >>> nums = strops.get_nums(test_str)
-    >>> print(nums)
-    123456
     """
 
     nums = "".join(re.findall("[0-9]+", s))
