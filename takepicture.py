@@ -14,7 +14,7 @@ now=datetime.datetime.now().isoformat()[-0:-7]
 
 #take picture
 with picamera.PiCamera() as camera:
-    camera.resolution = (1280, 720)
+    camera.resolution = (3280,2464)
     time.sleep(1) # Camera warm-up time
     filename = dir+'/image_'+now+'.jpg'
     camera.capture(filename)
