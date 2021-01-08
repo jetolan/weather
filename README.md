@@ -77,4 +77,5 @@ https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=62371
 
 
 ### piscope
+https://www.raspberrypi.org/forums/viewtopic.php?t=155990
 http://abyz.me.uk/rpi/pigpio/piscope.html
