@@ -73,3 +73,8 @@ arp -a
 
 ### wifi drivers
 https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=62371
+
+
+
+### piscope
+http://abyz.me.uk/rpi/pigpio/piscope.html
