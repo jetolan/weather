@@ -10,7 +10,7 @@ import csv
 import time
 import sys
 
-pin = 4
+pin = 24
 
 
 def bucket_tipped(channel):
@@ -21,7 +21,7 @@ def bucket_tipped(channel):
     print("rain gauge tip at : " + str(now))
 
     # write to file
-    file = '/home/pi/weather/rain_data.csv'
+    file = '/home/pi/weather/well_data.csv'
     columns = ['', 'isotime', 'rain_tip']
     if not os.path.exists(file):
         with open(file, 'w') as fp:
@@ -41,7 +41,7 @@ def main_loop():
     Continuous loop for constant monitoring
     """
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(pin, GPIO.IN, GPIO.PUD_UP)
+    GPIO.setup(pin, GPIO.IN, GPIO.PUD_DOWN)
     GPIO.add_event_detect(
         pin, GPIO.FALLING, callback=bucket_tipped, bouncetime=300)
 
