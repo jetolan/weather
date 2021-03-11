@@ -38,5 +38,5 @@ with picamera.PiCamera() as camera:
 
     # write
     time.sleep(5)  # Camera warm-up time
-    filename = f'{dir}/image_{now}.png'
+    filename = f'{dir}/image_{now}.jpg'
     camera.capture(filename)
