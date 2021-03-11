@@ -82,3 +82,29 @@ http://abyz.me.uk/rpi/pigpio/piscope.html
 commands:
 $ sudo pigpiod
 $ piscope
+
+
+### clock
+
+sudo i2cdetect -y 1
+sudo emacs /boot/config.txt
+add : dtoverlay=i2c-rtc,pcf8523
+reboot
+sudo i2cdetect -y 1
+ 
+ 
+sudo apt-get -y remove fake-hwclock
+sudo update-rc.d -f fake-hwclock remove 
+sudo systemctl disable fake-hwclock
+
+sudo emacs /lib/udev/hwclock-set
+comment out:
+#if [ -e /run/systemd/system ] ; then 
+#exit 0
+#fi
+
+#/sbin/hwclock --rtc=$dev --systz --badyear
+#/sbin/hwclock --rtc=$dev --systz
+
+sudo hwclock -w
+sudo hwclock -r
