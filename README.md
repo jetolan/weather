@@ -108,3 +108,9 @@ comment out:
 
 sudo hwclock -w
 sudo hwclock -r
+
+
+### pigpiod
+
+sudo pigpiod
+piscope &
