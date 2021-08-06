@@ -38,8 +38,8 @@ if __name__ == '__main__':
         # just go based on timer rather than date
         time.sleep(1)
         # 15min open -> pumping
-        switch_relay('up')
+        switch_relay('down')
         time.sleep(60*15)
         # then 45min closed -> not pumping
-        switch_relay('down')
+        switch_relay('up')
         time.sleep(60*45)
