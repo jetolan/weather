@@ -35,8 +35,11 @@ if __name__ == '__main__':
     while 1:
         # get time (not used yet)
         now = datetime.datetime.now().isoformat()[-0:-7]
-        # will need to change time to be 15min on every hour
-        time.sleep(10)
+        # just go based on timer rather than date
+        time.sleep(1)
+        # 15min open -> pumping
         switch_relay('up')
-        time.sleep(10)
+        time.sleep(60*15)
+        # then 45min closed -> not pumping
         switch_relay('down')
+        time.sleep(60*45)
