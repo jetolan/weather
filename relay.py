@@ -21,7 +21,7 @@ def switch_relay(state):
 
     GPIO.setmode(GPIO.BCM)  # GPIO Numbers instead of board numbers
 
-    RELAIS_1_GPIO = 24
+    RELAIS_1_GPIO = 23
     GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)  # GPIO Assign mode
 
     # whether we pull up or down depends on the jumpers on the relay
