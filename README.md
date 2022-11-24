@@ -6,12 +6,12 @@ enable ssh, i2c, camera
 ```
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install -y python3-pip python-smbus i2c-tools
+sudo apt-get install -y python3-pip python3-smbus i2c-tools matchbox-keyboard emacs
 sudo pip3 install --upgrade setuptools
 ```
 
 ```
-git clone https://github.com/jetolan/weather
+sudo git clone -b wellmeter https://github.com/jetolan/weather
 cd weather
 sudo python3 setup.py install
 ```
