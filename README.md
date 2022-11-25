@@ -16,7 +16,9 @@ cd weather
 sudo python3 setup.py install
 ```
 
+enable i2c
 ```
+sudo raspi-config nonint do_i2c 0
 sudo i2cdetect -y 1
 ```
 
