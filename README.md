@@ -3,6 +3,7 @@ Collects data from sensors and writes to csv file
 #SETUP
 ##################
 enable ssh, i2c, camera
+set time zone with sudo raspi-config
 ```
 sudo apt-get update
 sudo apt-get upgrade
